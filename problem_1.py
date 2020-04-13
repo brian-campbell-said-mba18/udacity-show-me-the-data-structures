@@ -4,6 +4,26 @@ class LinkedListNode:
         self.key = key
         self.value = value
         self.next = None
+        # This code comes from Reference 1 of References, verbatim.
+
+    def __repr__(self):
+        '''
+        This function returns the string value format when
+        print(LinkedListNode) is called.
+        '''
+        return f"Node(Key: {self.key}, Value: {self.value})"
+        # This code comes from Reference 2 of References.
+    
+    def __str__(self):
+        '''
+        This function returns the string value format when
+        str(LinkedListNode) is called.
+        '''
+        return f"Node(Key: {self.key}, Value: {self.value})"
+        # This code comes from Reference 2 of References.  
+
+class queue:
+    pass
 
 class LRU_HashMap:
     
@@ -24,8 +44,17 @@ class LRU_HashMap:
         self.bucket_array = [None for _ in range(self.array_size)]
         self.p = 31
         self.num_entries = 0
+        # Code and information regarding load factor comes from Reference 1 of References.
     
     def round_up(self, some_number):
+        '''
+        Disclaimer: This is a helper funciton. It is not usually meant to be called upon.
+
+        Function Purpose: This function rounds up a numerical value. If the value is an
+        integer, that integer is returned. Otherwise, the value is rounded up. This
+        function is used to ensure that the array size is large enough so the load factor
+        does not exceed 0.7.
+        '''
         if some_number % 1 == 0:
             return int(some_number)
         else:
@@ -50,11 +79,10 @@ class LRU_HashMap:
         self.bucket_array[bucket_index] = new_node
         self.num_entries += 1
         
-        # check for load factor
-        current_load_factor = self.num_entries / len(self.bucket_array)
-        if current_load_factor > self.load_factor:
-            self.num_entries = 0
-            self._rehash()
+        # check for overcapacity
+        if self.num_entries > self.capacity:
+            # self.num_entries = 0
+            self.make_room()
         
     def get(self, key):
         bucket_index = self.get_hash_code(key)
@@ -84,18 +112,8 @@ class LRU_HashMap:
     def size(self):
         return self.num_entries
 
-    def _rehash(self):
-        old_num_buckets = len(self.bucket_array)
-        old_bucket_array = self.bucket_array
-        num_buckets = 2 * old_num_buckets
-        self.bucket_array = [None for _ in range(num_buckets)]
-
-        for head in old_bucket_array:
-            while head is not None:
-                key = head.key
-                value = head.value
-                self.put(key, value)         # we can use our put() method to rehash
-                head = head.next
+    def make_room(self):
+        print("AWAY YOU DIRTY PIRATE HOOKER!")
                 
     def delete(self, key):
         bucket_index = self.get_bucket_index(key)
@@ -114,9 +132,18 @@ class LRU_HashMap:
                 previous = head
                 head = head.next
 
-stupid = LRU_HashMap(25)
-print(stupid.array_size)
+stupid = LRU_HashMap(5)
+stupid.put("one",1)
+stupid.put("one",0)
+stupid.put("two", 2)
+stupid.put("two", 6)
+stupid.put("three", 3)
+stupid.put("four", 4)
+stupid.put("five", 5)
+stupid.put('six', 7)
+
 
 
 # References
 # 1. Udacity: Data Structures & Algorithms Nanodgree; 2. Data Structures; Lesson 5: Maps and Hashing; 8. Hash Maps Notebook
+# 2. Udacity: Data Structures & Algorithms Nanodgree; 2. Data Structures; Lesson 4: Trees; 14. Code: BFS
