@@ -7,12 +7,30 @@ class LinkedListNode:
 
 class LRU_HashMap:
     
-    def __init__(self, initial_size = 5):
-        self.bucket_array = [None for _ in range(initial_size)]
+    def __init__(self, capacity=5, load_factor=0.7):
+        '''
+        This sets the inital variables for the class.
+        Variable Descriptions:
+            self.capacity - How many items can be in the bucket array. 5 is the default.
+            self.load_factor - The maximum limit of capacity / bucket array size, 0.7 by default.
+            self.array_size - The greatest bucket array size that makes the load factor <= 0.7.
+            self.bucket_array - This is where the nodes of keys and values are stored.
+            self.p - This is the prime number, 31, that's used for creating the hash code.
+            self.num_entries - This is a counter of how many nodes are currently in self.bucket_array.
+        '''
+        self.capacity = capacity
+        self.load_factor = load_factor
+        self.array_size = self.round_up(capacity / load_factor)
+        self.bucket_array = [None for _ in range(self.array_size)]
         self.p = 31
         self.num_entries = 0
-        self.load_factor = 0.7
-        
+    
+    def round_up(self, some_number):
+        if some_number % 1 == 0:
+            return int(some_number)
+        else:
+            return int((some_number + 1) // 1)
+
     def put(self, key, value):
         bucket_index = self.get_bucket_index(key)
 
@@ -95,6 +113,9 @@ class LRU_HashMap:
             else:
                 previous = head
                 head = head.next
+
+stupid = LRU_HashMap(25)
+print(stupid.array_size)
 
 
 # References
