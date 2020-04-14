@@ -11,7 +11,7 @@ def find_files(path, the_end):
     There are no limit to the depth of the subdirectories can be.
 
     Args:
-      suffix(str): suffix if the file name to be found
+      the_end(str): the file to return if the file has this specified ending.
       path(str): path of the file system
 
     Returns:
