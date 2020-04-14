@@ -1,19 +1,23 @@
 class LinkedListNode:
     
-    def __init__(self, key, value, version=1):
+    def __init__(self, key, value, num_of_edits=1):
+        '''
+        This is the node value class to be used by the Queue() and 
+        LRU_Hashmap() data structures.
+
+        This code comes from Reference 1 in References.
+        '''
         self.key = key
         self.value = value
-        self.version = version
+        self.num_of_edits = num_of_edits
         self.next = None
-        # This code comes from Reference 1 of References, verbatim.
-    
 
     def __repr__(self):
         '''
         This function returns the string value format when
         print(LinkedListNode) is called.
         '''
-        return f"Node(Key: {self.key}, Value: {self.value}, Version: {self.version})"
+        return f"Node(Key: {self.key}, Value: {self.value}, Num_of_edits: {self.num_of_edits})"
         # This code comes from Reference 2 of References.
     
     def __str__(self):
@@ -21,7 +25,7 @@ class LinkedListNode:
         This function returns the string value format when
         str(LinkedListNode) is called.
         '''
-        return f"Node(Key: {self.key}, Value: {self.value}, Version: {self.version})"
+        return f"Node(Key: {self.key}, Value: {self.value}, Num_of_edits: {self.num_of_edits})"
         # This code comes from Reference 2 of References.  
 
 class Queue:
@@ -31,6 +35,9 @@ class Queue:
         self.num_elements = 0
 
     def enq(self, entered_node):
+        '''
+        This adds a node to the back of the queue.
+        '''
         new_node = entered_node
         if self.head == None:
             self.head = new_node
@@ -41,6 +48,9 @@ class Queue:
         self.num_elements +=1
 
     def deq(self):
+        '''
+        This deletes the node at the front of the queue.
+        '''
         if self.size() == 0:
             return 
         temp = self.head
@@ -49,9 +59,15 @@ class Queue:
         return temp
 
     def size(self):
+        '''
+        This returns the number of elements in the queue.
+        '''
         return self.num_elements
 
     def print_queue(self):
+        '''
+        This function prints the queue and its contents.
+        '''
         print(f"""
         <dequeue AKA remove>
         ________________________________""")
@@ -101,6 +117,15 @@ class LRU_HashMap:
             return int((some_number + 1) // 1)
 
     def set(self, key, value):
+        '''
+        This either adds a new node to the LRU Hashmap or
+        it modifies an exisiting node. Also, if the LRU
+        Hashmap gets too big, the make room function is
+        called and the oldest node is deleted from the 
+        Hashmap.
+
+        This code comes from Reference 1 in References.
+        '''
         bucket_index = self.get_bucket_index(key)
 
         new_node = LinkedListNode(key, value)
@@ -110,12 +135,12 @@ class LRU_HashMap:
         while head is not None:
             if head.key == key:
                 head.value = value
-                head.version += 1
-                new_node.version = head.version
+                head.num_of_edits += 1
+                new_node.num_of_edits = head.num_of_edits
                 print(f"""
                 {head} modifed,
-                LRU node version = {head.version}!
-                Entry Record Node version = {new_node.version}!
+                LRU node # of edits = {head.num_of_edits}.
+                Entry Record Node # of edits = {new_node.num_of_edits}.
                 ______________________________________\n\n""")
                 self.entry_record.enq(new_node)
                 self.entry_record.print_queue()
@@ -136,6 +161,12 @@ class LRU_HashMap:
             self.make_room()
         
     def get(self, key):
+        '''
+        This returns the value of a search node if it exists.
+        Otherwise this function returns none.
+
+        This code comes from Reference 1 in References.
+        '''
         bucket_index = self.get_hash_code(key)
         head = self.bucket_array[bucket_index]
         while head is not None:
@@ -144,20 +175,38 @@ class LRU_HashMap:
             head = head.next
         return None
     
-    def get_version(self, key):
+    def get_edits(self, key):
+        """
+        This returns the number of edits of an existing node within
+        the LRU Hashmap structure.
+
+        This code comes from Reference 1 in References.
+        """
         bucket_index = self.get_hash_code(key)
         head = self.bucket_array[bucket_index]
         while head is not None:
             if head.key == key:
-                return head.version
+                return head.num_of_edits
             head = head.next
         return None
         
     def get_bucket_index(self, key):
+        '''
+        This returns the bucket index in order to query.
+        The bucket index is used to query the bucket array
+        for setting and getting nodes.
+
+        This code comes from Reference 1 in References.
+        '''
         bucket_index = self.get_hash_code(key)
         return bucket_index
     
     def get_hash_code(self, key):
+        '''
+        This returns the hash code for a key.
+
+        This code comes from Reference 1 in References.
+        '''
         key = str(key)
         num_buckets = len(self.bucket_array)
         current_coefficient = 1
@@ -170,9 +219,18 @@ class LRU_HashMap:
         return hash_code % num_buckets                                # one last compression before returning
     
     def size(self):
+        '''
+        This returns the number of entries within the LRU Hashmap.
+        '''
         return self.num_entries
 
     def make_room(self):
+        '''
+        When a Node is added to the LRU data structure that causes overcapacity,
+        this function querries the entry record queue to find the oldest node within
+        the LRU data structure. Once the value of the node matches a node within the
+        LRU hashmap structure, the LRU node is removed from the LRU structure.
+        '''
         while True:
             if self.entry_record.size() == 0:
                 print(f"""Entry record empty, breaking loop now!
@@ -186,7 +244,7 @@ class LRU_HashMap:
             ...
             """)
             if self.get(temp.key) == temp.value:
-                if self.get_version(temp.key) == temp.version:
+                if self.get_edits(temp.key) == temp.num_of_edits:
                     self.delete(temp.key)
                     print(f"""Entry record equals LRU record.
                     VICTORY IS OURS! Breaking the loop! 
@@ -197,6 +255,11 @@ class LRU_HashMap:
                 ________________________________________________\n\n""")
                 
     def delete(self, key):
+        '''
+        This function removes a Node from the LRU Hashmap.
+
+        This code comes from Reference 1 in References.
+        '''
         bucket_index = self.get_bucket_index(key)
         head = self.bucket_array[bucket_index]
 
