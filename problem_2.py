@@ -64,3 +64,6 @@ def find_files(path, the_end):
 print(find_files('testdir', ".c"), '\n')
 print(find_files("scavenger-hunt-1", ".docx"), '\n')
 print(find_files("scavenger-hunt-2", ".txt"))
+
+# References
+# 1. https://github.com/rahulatrkm/Show-Me-the-Data-Structures./blob/master/solution_2.py
