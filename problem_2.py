@@ -3,7 +3,7 @@ import os
 def find_files(path, the_end):
     """
     Find all files beneath path with file ending in,
-    the_end, the specified file end variable.
+    the_end, the specified file end string variable.
 
     Note that a path may contain further subdirectories
     and those subdirectories may also contain further subdirectories.
@@ -30,7 +30,7 @@ def find_files(path, the_end):
         over a file.
 
         Note on print statements: The commented out print statements
-        were used on debugging. These can be uncommented to see what
+        were used for debugging. These can be uncommented to see what
         happens in this function.
         """
         new_path = var_path + "/" + some_item
@@ -52,10 +52,15 @@ def find_files(path, the_end):
             for i in os.listdir(new_path):
                 the_recursive(i, new_path)
     
+    # This starts the for loop, creates a list of files and
+    # directories to explore in the overaching path, and
+    # calls the_recursive function.
     for item in os.listdir(path):
         the_recursive(item, path)
 
+    # This list of paths is returned as output.
     return list_of_paths
 
-answer = find_files('testdir', ".c")
-print(answer)
+print(find_files('testdir', ".c"), '\n')
+print(find_files("scavenger-hunt-1", ".docx"), '\n')
+print(find_files("scavenger-hunt-2", ".txt"))
