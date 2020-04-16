@@ -29,10 +29,10 @@ def is_user_in_group(user, group):
     
     This recursive search has three steps.
     
-    Step 1: If it finds the name within the names list of a group,
+    Step 1: if it finds the name within the names list of a group,
     it returns true.
     
-    Step 2: If it finds that there are no groups in its group list
+    Step 2: if it finds that there are no groups in its group list
     to query, it returns False.
     
     Step 3: If there are groups to continue to search for names,
@@ -62,7 +62,8 @@ def is_user_in_group(user, group):
         
     return output
 
-# Test Case 1 Setup
+# Test Case 1 Setup. This is the given
+# test from Udacity.
 parent = Group("parent")
 child = Group("child")
 sub_child = Group("subchild")
@@ -72,7 +73,44 @@ sub_child.add_user(sub_child_user)
 child.add_group(sub_child)
 parent.add_group(child)
 
-# Test Case 1 Execution, answer should be True.
+# Test Case 1 Execution: the answer should be True.
 print(is_user_in_group(sub_child_user, parent))
 
-# Test Case 2
+# Test Case 2 Setup: it is the Same as Test Case 1,
+# but the user == None.
+parent = Group("parent")
+child = Group("child")
+sub_child = Group("subchild")
+sub_child_user = None
+sub_child.add_user(sub_child_user)
+
+child.add_group(sub_child)
+parent.add_group(child)
+
+# Test Case 2 Execution: the answer should be True.
+print(is_user_in_group(sub_child_user, parent))
+
+# Test Case 3 Setup: I make the Group structure larger,
+# and the user is an integer value.
+parent = Group("parent")
+
+child = Group("child")
+silly_child = Group("silly child")
+
+sub_child = Group("subchild")
+sub_silly_child = Group("sub silly child")
+
+strange_integer_value = 42
+sub_child_user = "sub child user"
+
+sub_child.add_user(sub_child_user)
+sub_silly_child.add_user(strange_integer_value)
+
+child.add_group(sub_child)
+silly_child.add_group(sub_silly_child)
+
+parent.add_group(silly_child)
+parent.add_group(child)
+
+# Test Case 3 Execution: the answer should be True.
+print(is_user_in_group(strange_integer_value, parent))
