@@ -40,6 +40,9 @@ def is_user_in_group(user, group):
 
     Commented out Print Statements: These are for debugging. Feel free to
     uncomment them for debugging.
+
+    Note on References: See References at the end of the script. I borrowed the idea
+    to use a for loop to activate a recursive function from Reference 1.
     """
     
     # This is step 1
@@ -114,3 +117,6 @@ parent.add_group(child)
 
 # Test Case 3 Execution: the answer should be True.
 print(is_user_in_group(strange_integer_value, parent))
+
+# References
+# 1. https://github.com/rahulatrkm/Show-Me-the-Data-Structures./blob/master/solution_2.py
