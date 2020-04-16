@@ -2,8 +2,7 @@ class LinkedListNode:
     
     def __init__(self, key, value, num_of_edits=0):
         '''
-        This is the node value class to be used by the Queue() and 
-        LRU_Hashmap() data structures.
+        This is the node value class to be used by the Queue() and LRU_Hashmap() data structures.
 
         This code comes from Reference 1 in References.
         '''
@@ -14,16 +13,14 @@ class LinkedListNode:
 
     def __repr__(self):
         '''
-        This function returns the string value format when
-        print(LinkedListNode) is called.
+        This function returns the string value format when print(LinkedListNode) is called.
         '''
         return f"Node(Key: {self.key}, Value: {self.value}, Num_of_edits: {self.num_of_edits})"
         # This code comes from Reference 2 of References.
     
     def __str__(self):
         '''
-        This function returns the string value format when
-        str(LinkedListNode) is called.
+        This function returns the string value format when str(LinkedListNode) is called.
         '''
         return f"Node(Key: {self.key}, Value: {self.value}, Num_of_edits: {self.num_of_edits})"
         # This code comes from Reference 2 of References.  
@@ -118,22 +115,22 @@ class LRU_HashMap:
 
     def set(self, key, value):
         '''
-        This either adds a new node to the LRU Hashmap or
-        it modifies an exisiting node. Also, if the LRU
-        Hashmap gets too big, the make room function is
-        called and the oldest node is deleted from the 
-        Hashmap.
+        This either adds a new node to the LRU Hashmap or it modifies an exisiting node. 
+        Also, if the LRU Hashmap gets too big, the make room function is called and the
+        oldest node is deleted from the Hashmap.
 
         This code comes from Reference 1 in References.
+
+        Commented Out Print Statements: The print statements were used for debugging purposes.
+        Feel free to uncomment them to debug.
         '''
         bucket_index = self.get_bucket_index(key)
-
         entry_node = LinkedListNode(key, value)
-
         new_node = LinkedListNode(key, value)
         head = self.bucket_array[bucket_index]
 
         # check if key is already present in the map, and update it's value
+        # This also adds an entry node to the self.entry_record queue.
         while head is not None:
             if head.key == key:
                 head.value = value
@@ -153,6 +150,7 @@ class LRU_HashMap:
             head = head.next
 
         # key not found in the chain --> create a new entry and place it at the head of the chain
+        # This also adds an entry node to the self.entry_record queue.
         self.entry_record.enq(entry_node)
         head = self.bucket_array[bucket_index]
         new_node.next = head
@@ -167,8 +165,7 @@ class LRU_HashMap:
         
     def get(self, key):
         '''
-        This returns the value of a search node if it exists.
-        Otherwise this function returns none.
+        This returns the value of a search node if it exists. Otherwise this function returns none.
 
         This code comes from Reference 1 in References.
         '''
@@ -182,8 +179,7 @@ class LRU_HashMap:
     
     def get_edits(self, key):
         """
-        This returns the number of edits of an existing node within
-        the LRU Hashmap structure.
+        This returns the number of edits of an existing node within the LRU Hashmap structure.
 
         This code comes from Reference 1 in References.
         """
@@ -197,9 +193,8 @@ class LRU_HashMap:
         
     def get_bucket_index(self, key):
         '''
-        This returns the bucket index in order to query.
-        The bucket index is used to query the bucket array
-        for setting and getting nodes.
+        This returns the bucket index in order to query. The bucket index is used to query the
+        bucket array for setting and getting nodes.
 
         This code comes from Reference 1 in References.
         '''
@@ -231,10 +226,10 @@ class LRU_HashMap:
 
     def make_room(self):
         '''
-        When a Node is added to the LRU data structure that causes overcapacity,
-        this function querries the entry record queue to find the oldest node within
-        the LRU data structure. Once the value of the node matches a node within the
-        LRU hashmap structure, the LRU node is removed from the LRU structure.
+        When a Node is added to the LRU data structure that causes overcapacity, this function
+        querries the entry record queue to find the oldest node within the LRU data structure. 
+        Once the value of the node matches a node within the LRU hashmap structure, the LRU
+        node is removed from the LRU structure.
         '''
         while True:
             if self.entry_record.size() == 0:
@@ -253,8 +248,8 @@ class LRU_HashMap:
                 if self.get_edits(temp.key) == temp.num_of_edits:
                     self.delete(temp.key)
                     print(f"""
-                    Entry record equals LRU record.
-                    VICTORY IS OURS! Breaking the loop! 
+                    Entry record equals LRU record. LRU Node deleted.
+                    Succeess! BREAKING the loop! 
                     __________________________________________""")
                     break
             print(f"""
