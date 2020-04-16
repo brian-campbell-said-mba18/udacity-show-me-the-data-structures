@@ -1,6 +1,6 @@
 class LinkedListNode:
     
-    def __init__(self, key, value, num_of_edits=1):
+    def __init__(self, key, value, num_of_edits=0):
         '''
         This is the node value class to be used by the Queue() and 
         LRU_Hashmap() data structures.
@@ -129,6 +129,7 @@ class LRU_HashMap:
         bucket_index = self.get_bucket_index(key)
 
         new_node = LinkedListNode(key, value)
+        entry_node = new_node
         head = self.bucket_array[bucket_index]
 
         # check if key is already present in the map, and update it's value
@@ -142,13 +143,13 @@ class LRU_HashMap:
                 LRU node # of edits = {head.num_of_edits}.
                 Entry Record Node # of edits = {new_node.num_of_edits}.
                 ______________________________________\n\n""")
-                self.entry_record.enq(new_node)
+                self.entry_record.enq(entry_node)
                 self.entry_record.print_queue()
                 return
             head = head.next
 
         # key not found in the chain --> create a new entry and place it at the head of the chain
-        self.entry_record.enq(new_node)
+        self.entry_record.enq(entry_node)
         head = self.bucket_array[bucket_index]
         new_node.next = head
         self.bucket_array[bucket_index] = new_node
