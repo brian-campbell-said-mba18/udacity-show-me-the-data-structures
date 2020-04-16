@@ -128,8 +128,9 @@ class LRU_HashMap:
         '''
         bucket_index = self.get_bucket_index(key)
 
+        entry_node = LinkedListNode(key, value)
+
         new_node = LinkedListNode(key, value)
-        entry_node = new_node
         head = self.bucket_array[bucket_index]
 
         # check if key is already present in the map, and update it's value
@@ -137,14 +138,17 @@ class LRU_HashMap:
             if head.key == key:
                 head.value = value
                 head.num_of_edits += 1
-                new_node.num_of_edits = head.num_of_edits
-                print(f"""
-                {head} modifed,
-                LRU node # of edits = {head.num_of_edits}.
-                Entry Record Node # of edits = {new_node.num_of_edits}.
-                ______________________________________\n\n""")
+                entry_node.num_of_edits = head.num_of_edits
+                # Below print function is used for debugging purposes.
+                #print(f"""
+                #{head} modifed,
+                #LRU node # of edits = {head.num_of_edits}.
+                #Entry Record Node # of edits = {entry_node.num_of_edits}.
+                #______________________________________\n\n""")
+                entry_node.num_of_edits = head.num_of_edits
                 self.entry_record.enq(entry_node)
-                self.entry_record.print_queue()
+                # The print_queue function below is for debugging purposes.
+                #self.entry_record.print_queue()
                 return
             head = head.next
 
@@ -154,11 +158,11 @@ class LRU_HashMap:
         new_node.next = head
         self.bucket_array[bucket_index] = new_node
         self.num_entries += 1
-        self.entry_record.print_queue()
+        # The print_queue function below is for debugging purposes.
+        # self.entry_record.print_queue()
         
         # check for overcapacity
         if self.size() > self.capacity:
-            # self.num_entries = 0
             self.make_room()
         
     def get(self, key):
@@ -234,26 +238,29 @@ class LRU_HashMap:
         '''
         while True:
             if self.entry_record.size() == 0:
-                print(f"""Entry record empty, breaking loop now!
-                ________________________________________________""")
+                print(f"""
+                Entry record empty, breaking loop now!
+                __________________________________________""")
                 break
             temp = self.entry_record.deq()
-            print(f"""Popped {temp},
-            from entry record. Searching for
-            matching Node to delete in
-            the LRU Cache Structure...
+            print(f"""
+            Popped {temp},
+            from entry record. Searching formatching Node 
+            to delete in the LRU Cache Structure...
             ...
             """)
             if self.get(temp.key) == temp.value:
                 if self.get_edits(temp.key) == temp.num_of_edits:
                     self.delete(temp.key)
-                    print(f"""Entry record equals LRU record.
+                    print(f"""
+                    Entry record equals LRU record.
                     VICTORY IS OURS! Breaking the loop! 
-                    ___________________________________""")
+                    __________________________________________""")
                     break
-            print(f"""The entry record did not match the LRU
-                Cache Node. RESTARTING the loop!
-                ________________________________________________\n\n""")
+            print(f"""
+            The entry record did not match the LRU
+            Cache Node. RESTARTING the loop!
+             __________________________________________\n\n""")
                 
     def delete(self, key):
         '''
@@ -277,27 +284,19 @@ class LRU_HashMap:
                 previous = head
                 head = head.next
 
-stupid = LRU_HashMap(5)
-stupid.set("one",1)
-stupid.set("two", 2)
-stupid.set("one",0)
-#stupid.set("four", 4)
-#stupid.set("five", 5)
-#stupid.set('six', 7)
-#temp = stupid.entry_record.deq()
-#print(temp.key)
-#stupid.entry_record.print_queue()
+test1 = LRU_HashMap(5)
+test1.set("one",1)
+test1.set("two", 2)
+test1.set("one",0)
+test1.set("two", 42)
+test1.set("one",3)
+test1.set("one",2)
+test1.set("three", 234)
+test1.set("four", 4)
+test1.set("five", 5)
+test1.set('six', 7)
 
-'''
-idiot_queue = Queue()
-node_1 = LinkedListNode("idiot", 1, 1)
-node_2 = LinkedListNode("idiot", 2, 2)
-node_3 = LinkedListNode("idiot", 3, 3)
-idiot_queue.enq(node_1)
-idiot_queue.enq(node_2)
-idiot_queue.enq(node_3)
-idiot_queue.print_queue()
-'''
+print(test1.get("two"))
 
 # References
 # 1. Udacity: Data Structures & Algorithms Nanodgree; 2. Data Structures; Lesson 5: Maps and Hashing; 8. Hash Maps Notebook
