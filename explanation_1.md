@@ -1,0 +1,4 @@
+# Problem_1 Explanation
+
+## Code Design and Efficiency
+I used three data structures: linked list nodes, queues, and a hashmap. I stored all the cache entries in the hashmap so that the get() and set() operations would take O(1) time in the worst case. I used the queue as the data structure to store the entry records of nodes that were added to and edited in the hashmap. Also, entry records were made in the queue whenever node values were retrieved from the hashmap with the get() function. When there was an overflow in the hashmap, the entry record queue was queried to determine which node was last used in the hashmap. Querying the queue and removing the least recently used node from the hashmap took O(1) time in the average case, but varied if there was history of a lot of editing or retrieval of nodes in the hashmap. Finally, the space complexities for the get() and set() functions in the LRU hashmap were O(1) in the worst case.
