@@ -215,3 +215,46 @@ class Block_Links():
             bl_print += "<Tail of Block_Links Structure>"
             return bl_print
             
+# Test Case 1 Setup:
+test_1 = Block_Links()
+test_1.append("Don\'t forget to bring a towel!", "Towelie")
+test_1.append(None, "Towelie - number of brain cells")
+test_1.append(3.14, "What Towelie eats when he's feeling good")
+# Test Case 1 Data Structure:
+print("Below is the Block_Links Structure for test_1.")
+print(test_1)
+print("______________________________________________\n")
+
+# Test Case 2 Setup:
+test_2 = Block_Links()
+test_2.append("Portal Gun", "Rick Sanchez")
+test_2.append(10, "Jessica")
+test_2.append(None, "Morty's chances with Jessica")
+# Test Case 2 Data Structure:
+print("Below is the Block_Links Structure for test_2.")
+print(test_2)
+print("______________________________________________\n")
+
+# Test Case 3 Setup
+test_3 = Block_Links()
+test_3.append("Friend of Maltese Children", "Goosio")
+test_3.append("Joe Don Baker", "The worst")
+test_3.append("Joe Don Baker", "The best")
+# Test Case 3 Data Structure:
+print("Below is the Block_Links Structure for test_3.")
+print(test_3)
+print("______________________________________________\n")
+
+# Test Case 4 Setup and Execution:
+# This should result in an error in order to show that the Block Links structure only
+# accepts unique hash sting values.
+print("test_4 should result in an error. The Block_Links structure only accepts unique hash values.\n")
+test_4 = Block_Links()
+test_4.append("unique hashes only!", "duplicate hash")
+test_4.append("unique hashes only!", "duplicate hash")
+
+
+# References
+# 1. https://en.wikipedia.org/wiki/Blockchain
+#2. https://docs.python.org/3/library/time.html#time.struct_time
+
