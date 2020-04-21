@@ -161,7 +161,7 @@ def union(llist_1, llist_2, debug_mode=False):
         try:
             small[key] == big[key] # Boolean Query, if false, we go to except KeyError
             union_output.append(key)
-            del big[key] # Entry deleted from the big dictionary.
+            del big[key] # Entry deleted from the big dictionary. Code from Reference 1 in References.
             big_counter -= 1 # Big dictionary counter -1.
             if debug_mode:
                 print(f'''
@@ -284,3 +284,6 @@ print (union(linked_list_7,linked_list_8), '\n')
 print("Test Case 4: Intersection")
 print (intersection(linked_list_7,linked_list_8))
 print("_______________________________________________________\n")
+
+# References
+# 1. https://www.hackerearth.com/practice/python/working-with-data/dictionary/tutorial/
