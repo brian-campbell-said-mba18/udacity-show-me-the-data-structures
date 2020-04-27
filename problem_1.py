@@ -347,7 +347,7 @@ print("Moving onto Test Case 3.")
 print("________________________________________\n")
 
 # Test Case 3 Setup: This is simply the Udacity Test Case from the boilerplate code for project 1, this project.
-# However, I modified the first two nodes and gave them None as values.
+# However, I modified the first two nodes and gave them None as values for an edge case.
 test3 = LRU_HashMap()
 
 test3.set(1, None)
@@ -364,9 +364,37 @@ test3.set(5, 5)
 test3.set(6, 6)
 
 print(test3.get(3))      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+print("Moving onto Test Case 4.")
+print("________________________________________\n")
+
+# Test Case 4 Setup: This is an edge case in which the hashmap is empty.
+test4 = LRU_HashMap()
+
+print(test4.get(1))       # returns -1
+print(test4.get(2))       # returns -1
+print(test4.get(9))      # returns -1 
+
+print("Moving onto Test Case 5.")
+print("________________________________________\n")
+
+# Test Case 5 Setup: This is an edge case in the first entry into the LRU_Hashmap is a large number.
+test5 = LRU_HashMap()
+test5.set(758230958713095, "hello")
+test5.set(1, "Two")
+test5.set("Buckle", "my")
+test5.set("Shoe", "lace")
+
+print(test5.get(758230958713095)) # returns "hello"
+print(test5.get("Buckle")) # returns "my"
+
+test5.set(2, "blue")
+test5.set("fish", "and chips")
+
+print(test5.get(1)) # returns -1 because this entry was deleted from the Cache.
 
 print("End of Test Cases!")
 print("________________________________________")
+
 
 # References
 # 1. Udacity: Data Structures & Algorithms Nanodgree; 2. Data Structures; Lesson 5: Maps and Hashing; 8. Hash Maps Notebook
