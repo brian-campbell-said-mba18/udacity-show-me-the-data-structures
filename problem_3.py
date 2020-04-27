@@ -507,6 +507,9 @@ def str_to_freq_tree(a_string):
     
     Returns: A frequency tree.
     '''
+    if len(a_string) == 0:
+        frequency_tree = Tree(Node(0, ''))
+        return frequency_tree
     # This converts the a_string to a dictionary that counts the frequency of a character in the
     # string.
     the_dict = str_to_dict(a_string)
@@ -567,11 +570,59 @@ def huffman_recursion(node, huff_code ='', debug_mode = False):
     
     return
 
-# Below is the Test Case
+def prime_huffman_function(root, huff_code = "", debug_mode = False):
+    '''
+    Function Purpose: This function either identifies the edge case when there is only one string character, or it runs the
+    recursive huffman function, huffman_recursion.
+    '''
+    
+    # This is the edge case when the frequncy count of the root node is 1.
+    if root.get_frequency() == 1:
+        root.set_huff_code('0')
+        if debug_mode:
+            print(f'''
+            This is an edge case in which there is only one character in the string...\n
+            The root: {root}, with the character of ({root.get_character()}) now has a huffman code of ({root.get_huff_code()}).
+            ''')
+        return
+
+    # This is for all other cases in which the frequency count of the root node is not equal to 1.
+    debug_setting = debug_mode
+    huff_initial = huff_code
+    first_node = root
+    huffman_recursion(first_node, huff_initial, debug_setting)
+    return
+
+
+
+# Test Case 1
+print(f'''
+Start Test Case 1...
+''')
 test_tree = str_to_freq_tree("Happy Day")
 root_of_test_tree = test_tree.root
-huffman_recursion(root_of_test_tree, debug_mode=True)
+prime_huffman_function(root_of_test_tree, debug_mode=True)
+print('''
+End Test Case 1, begin Test Case 2.
+''')
 
+# Test Case 2: This is the edge case with nothing in the string.
+print(f'''
+Start Test Case 2...
+''')
+test_tree2= str_to_freq_tree("")
+root_2 = test_tree2.root
+prime_huffman_function(root_2, debug_mode=True)
+print('''
+End Test Case 2, begin Test Case 3.
+''')
+
+# Test Case 3: This is an edge case with only one character.
+test_tree3 = str_to_freq_tree("1")
+root3 = test_tree3.root
+prime_huffman_function(root3, debug_mode=True)
+print('''
+End Test Case 3.''')
 
 
 # References
