@@ -54,7 +54,7 @@ def linked_to_dict(a_linked_list, debug_mode=False):
     assert type(a_linked_list) == LinkedList, "This function needs a linked list as input!"
     
     # This raises an error if there is nothing in the linked list.
-    assert not a_linked_list.is_empty(), "Please use a linked list that has at least one node."
+    # assert not a_linked_list.is_empty(), "Please use a linked list that has at least one node."
     
     # This creates the current_node, the unique_values dictionary, and the counter of
     # unique values in the dictionary for the while loop.
@@ -283,6 +283,32 @@ print("Test Case 4: Union")
 print (union(linked_list_7,linked_list_8), '\n')
 print("Test Case 4: Intersection")
 print (intersection(linked_list_7,linked_list_8))
+print("_______________________________________________________\n")
+
+# Test Case 5
+linked_list_9 = LinkedList()
+linked_list_10 = LinkedList() # Linked List 10 is just an empty list.
+
+
+element_9 = ["the", "illuminati", "is", "watching"]
+
+for i in element_9:
+    linked_list_9.append(i)
+
+print("Test Case 5: Union")
+print (union(linked_list_9,linked_list_10), '\n')
+print("Test Case 5: Intersection")
+print (intersection(linked_list_9,linked_list_10))
+print("_______________________________________________________\n")
+
+# Test Case 6
+linked_list_11 = LinkedList() # Linked List 11 is just an empty list.
+linked_list_12 = LinkedList() # Linked List 12 is just an empty list.
+
+print("Test Case 6: Union")
+print (union(linked_list_11,linked_list_12), '\n')
+print("Test Case 6: Intersection")
+print (intersection(linked_list_11,linked_list_12))
 print("_______________________________________________________\n")
 
 # References
