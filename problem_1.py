@@ -323,10 +323,10 @@ test1.set('six', 7)
 print(test1.get("two")) # This should print -1.
 print(test1.get("one")) # This should print 2.
 print(test1.get("six")) # This should print 7.
-print("Moving onto Test Case 2.")
 print("________________________________________\n")
 
 # Test Case 2: This is simply the Udacity Test Case from the boilerplate code for project 1, this project.
+print("Starting Test Case 2.\n")
 our_cache = LRU_HashMap(5)
 
 our_cache.set(1, 1)
@@ -342,12 +342,11 @@ our_cache.set(5, 5)
 our_cache.set(6, 6)
 
 print(our_cache.get(3))      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
-
-print("Moving onto Test Case 3.")
 print("________________________________________\n")
 
 # Test Case 3 Setup: This is simply the Udacity Test Case from the boilerplate code for project 1, this project.
 # However, I modified the first two nodes and gave them None as values for an edge case.
+print("Starting Test Case 3.\n")
 test3 = LRU_HashMap()
 
 test3.set(1, None)
@@ -364,35 +363,33 @@ test3.set(5, 5)
 test3.set(6, 6)
 
 print(test3.get(3))      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
-print("Moving onto Test Case 4.")
 print("________________________________________\n")
 
 # Test Case 4 Setup: This is an edge case in which the hashmap is empty.
+print("Starting Test Case 4.\n")
 test4 = LRU_HashMap()
 
 print(test4.get(1))       # returns -1
 print(test4.get(2))       # returns -1
 print(test4.get(9))      # returns -1 
 
-print("Moving onto Test Case 5.")
 print("________________________________________\n")
 
 # Test Case 5 Setup: This is an edge case in the first entry into the LRU_Hashmap is a large number.
+print("Starting Test Case 5, the last test case!\n")
 test5 = LRU_HashMap()
-test5.set(758230958713095, "hello")
+test5.set(75823096234523234523452345234523452353458713095, "hello")
 test5.set(1, "Two")
 test5.set("Buckle", "my")
 test5.set("Shoe", "lace")
 
-print(test5.get(758230958713095)) # returns "hello"
+print(test5.get(75823096234523234523452345234523452353458713095)) # returns "hello"
 print(test5.get("Buckle")) # returns "my"
 
 test5.set(2, "blue")
 test5.set("fish", "and chips")
 
 print(test5.get(1)) # returns -1 because this entry was deleted from the Cache.
-
-print("End of Test Cases!")
 print("________________________________________")
 
 
