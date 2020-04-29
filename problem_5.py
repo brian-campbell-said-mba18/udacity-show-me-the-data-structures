@@ -245,6 +245,18 @@ print("Below is the Block_Links Structure for test_3.")
 print(test_3)
 print("______________________________________________\n")
 
+# Test Case 4 Setup: This is an edge case in which the first hash value is, "".
+test_4 = Block_Links()
+test_4.append(None, "")
+test_4.append("Mr Hankey", "Howdy Ho")
+test_4.append(3.14, "Pie")
+# Test Case 4 Data Structure:
+print("Below is the Block_Links Structure for test_4.")
+print(test_4)
+print("______________________________________________\n")
+
+
+
 # Test Case 4 Setup and Execution:
 # This should result in an error in order to show that the Block Links structure only
 # accepts unique hash sting values.
