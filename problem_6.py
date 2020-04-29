@@ -1,4 +1,4 @@
-class Node:
+codclass Node:
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -285,7 +285,7 @@ print("Test Case 4: Intersection")
 print (intersection(linked_list_7,linked_list_8))
 print("_______________________________________________________\n")
 
-# Test Case 5
+# Test Case 5. This is an edge case with one empty list.
 linked_list_9 = LinkedList()
 linked_list_10 = LinkedList() # Linked List 10 is just an empty list.
 
@@ -301,7 +301,7 @@ print("Test Case 5: Intersection")
 print (intersection(linked_list_9,linked_list_10))
 print("_______________________________________________________\n")
 
-# Test Case 6
+# Test Case 6, this is an edge case with two empty lists.
 linked_list_11 = LinkedList() # Linked List 11 is just an empty list.
 linked_list_12 = LinkedList() # Linked List 12 is just an empty list.
 
