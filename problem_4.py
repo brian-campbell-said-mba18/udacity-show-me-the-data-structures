@@ -80,7 +80,8 @@ parent.add_group(child)
 print(is_user_in_group(sub_child_user, parent))
 
 # Test Case 2 Setup: it is the Same as Test Case 1,
-# but the user == None.
+# but the user == None. This is an edge case because the value is
+# set to None.
 parent = Group("parent")
 child = Group("child")
 sub_child = Group("subchild")
@@ -118,5 +119,60 @@ parent.add_group(child)
 # Test Case 3 Execution: the answer should be True.
 print(is_user_in_group(strange_integer_value, parent))
 
+# Test Case 4 Setup: I use the same setup as Test Case 3, except
+# except strange integer value is replaced with nothing_string, 
+# which is set to ''. This is an edge case in which I am using a
+# nothing value.
+parent = Group("parent")
+
+child = Group("child")
+silly_child = Group("silly child")
+
+sub_child = Group("subchild")
+sub_silly_child = Group("sub silly child")
+
+nothing_string = ''
+sub_child_user = "sub child user"
+
+sub_child.add_user(sub_child_user)
+sub_silly_child.add_user(nothing_string)
+
+child.add_group(sub_child)
+silly_child.add_group(sub_silly_child)
+
+parent.add_group(silly_child)
+parent.add_group(child)
+
+# Test Case 4 Execution: the answer should be True.
+print(is_user_in_group(nothing_string, parent))
+
+# Test Case 5 Setup: I use the same setup as Test Case , except
+# the nothing_string value is replaced with some_person, 
+# which is set to 'person'. This is an edge case in which I am using a
+# nothing value, '', to conuct the query and the result should be False.
+parent = Group("parent")
+
+child = Group("child")
+silly_child = Group("silly child")
+
+sub_child = Group("subchild")
+sub_silly_child = Group("sub silly child")
+
+some_person = 'person'
+sub_child_user = "sub child user"
+
+sub_child.add_user(sub_child_user)
+sub_silly_child.add_user(some_person)
+
+child.add_group(sub_child)
+silly_child.add_group(sub_silly_child)
+
+parent.add_group(silly_child)
+parent.add_group(child)
+
+nothing_value = ''
+
+# Test Case 5 Execution: the answer should be False.
+print(is_user_in_group(nothing_value, parent))
 # References
 # 1. https://github.com/rahulatrkm/Show-Me-the-Data-Structures./blob/master/solution_2.py
