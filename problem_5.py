@@ -255,15 +255,24 @@ print("Below is the Block_Links Structure for test_4.")
 print(test_4)
 print("______________________________________________\n")
 
+# Test Case 5 Setup: This is an edge case in which the hash values
+# are extremely large strings.
+test_5 = Block_Links()
+test_5.append(None, "asd;lkfhalksdfgaskdfha;lskdfjadvgsadlfuhwealkdjfhvalvkcbaldkxfjhsdas")
+test_5.append("Mr Hankey", "1431643017501342610934871903284136401932487102943871209346132098471239084712309847")
+test_5.append(3.14, "fjkd;afjkds;laksdjf;alkdfjas;kldfj741892347198324687234691283746198273461938247613")
+# Test Case 4 Data Structure:
+print("Below is the Block_Links Structure for test_5.")
+print(test_5)
+print("______________________________________________\n")
 
-
-# Test Case 4 Setup and Execution:
+# Test Case 6 Setup and Execution:
 # This should result in an error in order to show that the Block Links structure only
 # accepts unique hash sting values.
-print("test_4 should result in an error. The Block_Links structure only accepts unique hash values.\n")
-test_4 = Block_Links()
-test_4.append("unique hashes only!", "duplicate hash")
-test_4.append("unique hashes only!", "duplicate hash")
+print("test_6 should result in an error. The Block_Links structure only accepts unique hash values.\n")
+test_6 = Block_Links()
+test_6.append("unique hashes only!", "duplicate hash")
+test_6.append("unique hashes only!", "duplicate hash")
 
 
 # References
