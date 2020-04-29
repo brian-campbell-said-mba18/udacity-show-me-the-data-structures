@@ -594,12 +594,14 @@ def prime_huffman_function(root, huff_code = "", debug_mode = False):
     return
 
 
+import sys
 
 # Test Case 1
 print(f'''
 Start Test Case 1...
 ''')
-test_tree = str_to_freq_tree("Happy Day")
+test_string = "Happy Day"
+test_tree = str_to_freq_tree(test_string)
 root_of_test_tree = test_tree.root
 prime_huffman_function(root_of_test_tree, debug_mode=True)
 print('''
