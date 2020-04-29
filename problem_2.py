@@ -20,6 +20,10 @@ def find_files(path, the_end):
 
     assert os.listdir(path), "Unable to find the path. Please try resetting the CWD!"
 
+    # This returns None in the edge case of '', a nothing string value.
+    if the_end == '':
+        return None
+
     # This creates the recursive function within the function.
     def the_recursive(some_item, var_path):
         """
@@ -74,6 +78,16 @@ print(find_files("scavenger-hunt-2", ".txt"), '\n') # Several files should be re
 # This is Test Case 4.
 print("Test Case 4 results:")
 print(find_files("scavenger-hunt-2", ".pdf"), '\n') # None should be returned. There are no PDFs under this directory.
+
+# This is Edge Case 1: this is an edge case in which an extremely large input is put into find_files function.
+# The result of Edge Case 1 should be None.
+print("Edge Case 1 results:")
+print(find_files("testdir", '.asdifha;dsljkfafajsdf;lkjasdf;lkasdjf;saldkjfasdfhu3r4fajdvhdfakjslfkdjaeodl;fskfdsd'), '\n') 
+
+
+# This is Edge Case 2: this is an edge case in which nothing is input. The result of Edge Case 2 should be None.
+print("Edge Case 2 results:")
+print(find_files("testdir", ''), '\n')
 
 # References
 # 1. https://github.com/rahulatrkm/Show-Me-the-Data-Structures./blob/master/solution_2.py
